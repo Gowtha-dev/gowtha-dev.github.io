@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+		<link rel="stylesheet" media="all" type="text/css" href="css/sudokuJS.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			* {
+				margin:0; padding:0;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+      .sudoku-board-cell input {
+  			background: none;
+  			font-size: 16px;
+      }
+
+			.wrap {
+				padding: 2em 1em;
+				width: 400px;
+				max-width: 100%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			@media(min-width: 30em){
+				.sudoku-board .candidates {
+					font-size: .8em;
+				}
+			}
+
+      [data-board-size="4"].sudoku-board .sudoku-board-cell:nth-of-type(4n+1){
+  			border-left-width: 2px;
+  			border-left-color: #808080;
+  		}
+  		[data-board-size="4"].sudoku-board .sudoku-board-cell:nth-of-type(n):nth-of-type(-n+4){
+  			border-top-width: 2px;
+  			border-top-color: #808080;
+  		}
+  		[data-board-size="4"].sudoku-board .sudoku-board-cell:nth-of-type(2n){
+  			border-right-width: 2px;
+  			border-right-color: #808080;
+  		}
+  		[data-board-size="4"].sudoku-board .sudoku-board-cell:nth-of-type(n+5):nth-of-type(-n+8),
+  		[data-board-size="4"].sudoku-board .sudoku-board-cell:nth-of-type(n+13):nth-of-type(-n+17) {
+  			border-bottom-width: 2px;
+  			border-bottom-color: #808080;
+  		}
+		.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #4CAF50;} /* Green */
+.button2 {background-color: #008CBA;} /* Blue */
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+  
+}
+
+		</style>
+
+		<title>9 BOX</title>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="js/sudokuJS.js"></script>
+	</head>
+
+	<body>
+	<ul>
+  <li><a  href="sudoku4.html">4 BOX</a></li>
+  <li><a class="active" href="sudoku9.html">9 BOX</a></li>
+ 
+  <li style="float:right"><a href="index.html">HOME</a></li>
+</ul>
+
+	<center>
+	<div class="wrap">
+		<h1>play Sudoku <i Style="font-size:16px" class="fa fa-smile-o" aria-hidden="true"></i></h1>
+		</br>
+		<!--the only required html-->
+		<div id="sudoku" class="sudoku-board">
+		</div>
+
+		<!--solve buttons-->
+		<button style="border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #4CAF50;" class="js-solve-step-btn"><i style="font-size:16px" class="fa fa-question-circle" aria-hidden="true"></i></button>
+  
+         <button  style="border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 1px;
+  cursor: pointer;
+  background-color: #008CBA;" onClick="refreshPage()" type="submit"><i class="fa fa-refresh fa-spin" style="font-size:16px"></i></button>
+  
+  <button  style="border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #A02DDA;" onClick="refreshPage()" type="submit"><i style="font-size:16px" class="fa fa-arrow-right" aria-hidden="true"></i></button>
+		<!--
+		Solve: <button type="button" class="js-solve-step-btn">help</button>
+		<button type="button" class="js-solve-all-btn">All</button> -->
+	</div>
+
+	<script>
+	function refreshPage(){
+    window.location.reload();
+} 
+		var mySudokuJS = $("#sudoku").sudokuJS({
+			boardSize: 9
+		});
+
+		$(".js-solve-step-btn").on("click", mySudokuJS.solveStep);
+		$(".js-solve-all-btn").on("click", mySudokuJS.solveAll);
+	</script>
+	</body>
+</html>
